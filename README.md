@@ -4,10 +4,6 @@
   <img src="./assets/images/icon.png" width="150" alt="Acordai App Icon">
 </p>
 
-<p align="center">
-  <img src="./assets/images/icon.png" width="150" alt="Acordai App Icon">
-</p>
-
 **Acordaí** is an open-source mobile app built with **Expo (React Native)** that helps users stay alert while traveling.  
 It allows users to **select a destination on the map** and automatically **triggers a loud alarm notification** when they are close to that point — perfect for those who might doze off on a bus, train, or metro ride.
 
