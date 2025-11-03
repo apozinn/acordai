@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "acordai",
+    "name": "Acordai",
     "slug": "acordai",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,7 +9,12 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.${EXPO_USERNAME}.acordai",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Acordai needs your location to alert you when you reach your destination.",
+        "NSLocationAlwaysUsageDescription": "Acordai will continue to monitor your location even when closed, to wake you at your stop."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -19,7 +24,12 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ],
+      "package": "com.${EXPO_USERNAME}.acordai"
     },
     "web": {
       "output": "static",
@@ -38,11 +48,24 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/icon.png",
+          "color": "#FF0000",
+          "sounds": [
+            "./assets/alarm.mp3"
+          ]
+        }
       ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "note": "For production, replace 'example' with your own bundle identifier and add your Google Maps API key in AndroidManifest.xml."
     }
   }
 }

@@ -1,50 +1,198 @@
-# Welcome to your Expo app 👋
+# 🚨 AcordaÍ
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<p align="center">
+  <img src="./assets/images/icon.png" width="150" alt="Acordai App Icon">
+</p>
 
-## Get started
+<p align="center">
+  <img src="./assets/images/icon.png" width="150" alt="Acordai App Icon">
+</p>
 
-1. Install dependencies
+**Acordaí** is an open-source mobile app built with **Expo (React Native)** that helps users stay alert while traveling.  
+It allows users to **select a destination on the map** and automatically **triggers a loud alarm notification** when they are close to that point — perfect for those who might doze off on a bus, train, or metro ride.
 
-   ```bash
-   npm install
-   ```
+## 📸 Screenshots
 
-2. Start the app
+<p align="center">
+  <img src="./assets/images/screenshot.png" width="50%" alt="Acordai App Icon">
+</p>
 
-   ```bash
-   npx expo start
-   ```
+## ✨ Features
 
-In the output, you'll find options to open the app in a
+- 🗺️ **Interactive Map:** Select any point on the map as your destination.
+- 📍 **Geofencing Alerts:** App monitors when you are near the selected destination — even in background.
+- 🔔 **Loud Wake-Up Alarm:** When entering the destination area, an **alarm sound + high-priority notification** plays to wake you up.
+- 📱 **Works in Background:** Continues monitoring even when the app is minimized or closed.
+- 💤 **Perfect for Commuters:** Designed for people who might nap during travel and don’t want to miss their stop.
+- 🌗 **Light/Dark Theme:** Automatically adapts to your device’s appearance.
+- 🧭 **Accurate GPS Tracking:** Uses device location services for precision.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🧩 Technologies Used
 
-## Get a fresh project
+- [React Native](https://reactnative.dev/)
+- [Expo SDK](https://docs.expo.dev/)
+- [expo-location](https://docs.expo.dev/versions/latest/sdk/location/)
+- [expo-notifications](https://docs.expo.dev/versions/latest/sdk/notifications/)
+- [expo-task-manager](https://docs.expo.dev/versions/latest/sdk/task-manager/)
+- [react-native-maps](https://github.com/react-native-maps/react-native-maps)
 
-When you're ready, run:
+---
 
-```bash
-npm run reset-project
+## 🏗️ Project Structure
+
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+acordai/
+├── app/
+│   ├── index.tsx            # Main screen (Map + Alarm logic)
+│   ├── _layout.tsx          # Root layout
+│   └── ...
+├── assets/
+│   ├── alarm.mp3            # Alarm sound
+│   ├── images/
+│   │   ├── icon.png         # App icon
+│   │   ├── splash-icon.png  # Splash screen logo
+│   │   └── ...
+├── app.json                 # Expo configuration (permissions, plugins, etc.)
+├── package.json
+└── README.md
 
-## Learn more
+````
 
-To learn more about developing your project with Expo, look at the following resources:
+---
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## ⚙️ Setup & Installation
 
-## Join the community
+### Prerequisites
+Make sure you have the following installed:
+- **Node.js** ≥ 18
+- **Expo CLI** (`npm install -g expo-cli`)
+- **Android Studio** (for emulators and builds)
+- **Google Maps API Key** (required for Android map view)
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/apozinn/acordai.git
+cd acordai
+````
+
+---
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+or
+
+```bash
+yarn install
+```
+
+---
+
+### 3. Configure Google Maps API Key
+
+For Android, open `android/app/src/main/AndroidManifest.xml` and insert:
+
+```xml
+<meta-data
+  android:name="com.google.android.geo.API_KEY"
+  android:value="YOUR_API_KEY_HERE" />
+```
+
+You can get a free key from [Google Cloud Console](https://console.cloud.google.com/).
+
+---
+
+### 4. Run the App
+
+```bash
+npx expo start
+```
+
+* Press **`a`** to open in Android Emulator
+* Press **`w`** to open in web browser
+* Press **`s`** to scan the QR code on a physical device (via Expo Go)
+
+---
+
+### 5. Building for Production
+
+#### Android
+
+```bash
+npx expo prebuild
+npx expo build:android
+```
+
+This will generate an `.apk` or `.aab` ready to upload to the **Google Play Store**.
+
+#### iOS
+
+```bash
+npx expo build:ios
+```
+
+You’ll need a valid Apple Developer account to deploy to the App Store.
+
+---
+
+## 🧪 Development & Testing
+
+To simulate proximity alerts without moving:
+
+```ts
+import * as Notifications from 'expo-notifications';
+
+export async function simulateArrival() {
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: '🚨 Simulated Arrival!',
+      body: 'You have reached your selected point (simulation).',
+      sound: 'alarm.wav',
+      priority: Notifications.AndroidNotificationPriority.MAX,
+    },
+    trigger: null,
+  });
+}
+```
+
+Call `simulateArrival()` anywhere to test your notification behavior instantly.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+Feel free to fork this repository and open pull requests with improvements.
+
+### Suggested areas:
+
+* UI/UX improvements
+* Additional alarm customization (volume, vibration, etc.)
+* Better offline handling or fallback
+* Localization (multilingual support)
+
+---
+
+## 📄 License
+
+This project is licensed under the **GNU LESSER GENERAL PUBLIC LICENSE** — see the [LICENSE](./LICENSE) file for details.
+
+---
+
+## 🌍 Support & Feedback
+
+If you enjoy this project, please give it a ⭐ on GitHub!
+Found a bug or have suggestions? Open an [issue](https://github.com/apozinn/acordai/issues).
+
+---
+
+**Acordai** — *Never miss your stop again.*
