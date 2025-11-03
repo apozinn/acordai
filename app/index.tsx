@@ -24,7 +24,7 @@ TaskManager.defineTask(GEOFENCE_TASK, async ({ data: { eventType, region }, erro
       content: {
         title: '🚨 Chegando ao destino!',
         body: 'Você chegou ao ponto selecionado!',
-        sound: 'alarm.wav',
+        sound: 'alarm.mp3',
         priority: Notifications.AndroidNotificationPriority.MAX,
       },
       trigger: null,

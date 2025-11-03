@@ -152,7 +152,7 @@ export async function simulateArrival() {
     content: {
       title: '🚨 Simulated Arrival!',
       body: 'You have reached your selected point (simulation).',
-      sound: 'alarm.wav',
+      sound: 'alarm.mp3',
       priority: Notifications.AndroidNotificationPriority.MAX,
     },
     trigger: null,
