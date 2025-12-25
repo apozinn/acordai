@@ -1,7 +1,7 @@
 import * as Location from 'expo-location';
 import * as Notifications from 'expo-notifications';
 import * as TaskManager from 'expo-task-manager';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert, Button, Dimensions, Platform, StyleSheet, Text, View } from 'react-native';
 import MapView, { MapPressEvent, Marker } from 'react-native-maps';
 
@@ -22,8 +22,8 @@ TaskManager.defineTask(GEOFENCE_TASK, async ({ data: { eventType, region }, erro
   if (eventType === Location.GeofencingEventType.Enter) {
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: '🚨 Chegando ao destino!',
-        body: 'Você chegou ao ponto selecionado!',
+        title: '🚨 Approaching destination!',
+        body: 'You have reached the selected location!',
         sound: 'alarm.mp3',
         priority: Notifications.AndroidNotificationPriority.MAX,
       },
@@ -41,17 +41,18 @@ export default function App() {
     (async () => {
       try {
         const { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') throw new Error('Permissão negada');
+        if (status !== 'granted') throw new Error('Permission denied');
 
         if (Platform.OS === 'android') {
           const bgStatus = await Location.requestBackgroundPermissionsAsync();
-          if (bgStatus.status !== 'granted') console.warn('Sem permissão em segundo plano');
+          if (bgStatus.status !== 'granted')
+            console.warn('Background location permission not granted');
         }
 
         const loc = await Location.getCurrentPositionAsync({});
         setLocation(loc.coords);
       } catch (err) {
-        console.warn('Erro ao obter localização, usando padrão São Paulo');
+        console.warn('Failed to get location, using São Paulo as default');
         setLocation({ latitude: -23.55052, longitude: -46.633308 });
       }
     })();
@@ -63,12 +64,12 @@ export default function App() {
   };
 
   const startGeofencing = async () => {
-    if (!selected) return Alert.alert('Selecione um ponto primeiro');
+    if (!selected) return Alert.alert('Please select a destination first');
 
     try {
       await Location.startGeofencingAsync(GEOFENCE_TASK, [
         {
-          identifier: 'destino',
+          identifier: 'destination',
           latitude: selected.latitude,
           longitude: selected.longitude,
           radius: 100,
@@ -78,9 +79,9 @@ export default function App() {
       ]);
 
       setGeofencingActive(true);
-      Alert.alert('✅ Alerta de chegada ativado');
+      Alert.alert('✅ Arrival alert activated');
     } catch (err) {
-      console.error('Erro ao iniciar geofencing:', err);
+      console.error('Error starting geofencing:', err);
     }
   };
 
@@ -88,29 +89,29 @@ export default function App() {
     try {
       await Location.stopGeofencingAsync(GEOFENCE_TASK);
       setGeofencingActive(false);
-      Alert.alert('⏹️ Alerta parado');
+      Alert.alert('⏹️ Alert stopped');
     } catch (err) {
       console.error(err);
     }
   };
 
-  // 🔥 Função de simulação (gera o mesmo efeito do alarme real)
+  // 🔥 Simulation function (triggers the same effect as the real alarm)
   const simulateArrival = async () => {
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: '🚨 SIMULAÇÃO: Você chegou ao destino!',
-        body: 'Este é um teste do alarme de chegada.',
+        title: '🚨 SIMULATION: You arrived at your destination!',
+        body: 'This is a test of the arrival alarm.',
         sound: 'alarm.mp3',
         priority: Notifications.AndroidNotificationPriority.MAX,
       },
       trigger: null,
     });
 
-    Alert.alert('🔔 Simulação executada', 'O alarme de chegada foi disparado.');
+    Alert.alert('🔔 Simulation executed', 'The arrival alarm has been triggered.');
   };
 
   if (!location)
-    return <Text style={{ textAlign: 'center', marginTop: 50 }}>Carregando mapa...</Text>;
+    return <Text style={{ textAlign: 'center', marginTop: 50 }}>Loading map...</Text>;
 
   return (
     <View style={styles.container}>
@@ -126,7 +127,12 @@ export default function App() {
         }}
       >
         {selected && (
-          <Marker coordinate={selected} title="Destino" description="Ponto selecionado" pinColor="red" />
+          <Marker
+            coordinate={selected}
+            title="Destination"
+            description="Selected location"
+            pinColor="red"
+          />
         )}
       </MapView>
 
@@ -135,15 +141,17 @@ export default function App() {
           <>
             <Text>📍 Latitude: {selected.latitude.toFixed(6)}</Text>
             <Text>📍 Longitude: {selected.longitude.toFixed(6)}</Text>
+
             {!geofencingActive ? (
-              <Button title="Iniciar Alerta de Chegada" onPress={startGeofencing} />
+              <Button title="Start Arrival Alert" onPress={startGeofencing} />
             ) : (
-              <Button title="Parar Alerta" color="red" onPress={stopGeofencing} />
+              <Button title="Stop Alert" color="red" onPress={stopGeofencing} />
             )}
-            <Button title="Simular Chegada" color="orange" onPress={simulateArrival} />
+
+            <Button title="Simulate Arrival" color="orange" onPress={simulateArrival} />
           </>
         ) : (
-          <Text>Toque no mapa para escolher um ponto</Text>
+          <Text>Tap on the map to select a destination</Text>
         )}
       </View>
     </View>

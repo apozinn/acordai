@@ -1,19 +1,19 @@
 {
   "expo": {
-    "name": "Acordai",
-    "slug": "acordai",
+    "name": "Zegen",
+    "slug": "Awareness, exactly when it matters.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "acordai",
+    "scheme": "zegen",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.${EXPO_USERNAME}.acordai",
+      "bundleIdentifier": "com.${EXPO_USERNAME}.zegen",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Acordai needs your location to alert you when you reach your destination.",
-        "NSLocationAlwaysUsageDescription": "Acordai will continue to monitor your location even when closed, to wake you at your stop."
+        "NSLocationWhenInUseUsageDescription": "Zegen needs your location to alert you when you reach your destination.",
+        "NSLocationAlwaysUsageDescription": "Zegen will continue to monitor your location even when closed, to wake you at your stop."
       }
     },
     "android": {
@@ -29,7 +29,7 @@
         "ACCESS_FINE_LOCATION",
         "ACCESS_BACKGROUND_LOCATION"
       ],
-      "package": "com.${EXPO_USERNAME}.acordai"
+      "package": "com.${EXPO_USERNAME}.zegen"
     },
     "web": {
       "output": "static",

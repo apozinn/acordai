@@ -1,48 +1,66 @@
-# 🚨 AcordaÍ
+# 🚨 Zegen
 
 <p align="center">
-  <img src="./assets/images/icon.png" width="150" alt="Acordai App Icon">
+  <img src="./assets/images/icon.png" width="150" alt="Zegen App Icon">
 </p>
 
-**Acordaí** is an open-source mobile app built with **Expo (React Native)** that helps users stay alert while traveling.  
-It allows users to **select a destination on the map** and automatically **triggers a loud alarm notification** when they are close to that point — perfect for those who might doze off on a bus, train, or metro ride.
+**Zegen** is an open-source mobile application built with **Expo (React Native)** designed to ensure you **never miss your stop again**.
+It allows users to **select a destination directly on the map** and automatically **triggers a high-priority alarm notification** when they are approaching that location — ideal for commuters who might fall asleep on buses, trains, or subways.
+
+> Think of Zegen as your **personal geolocation wake-up assistant**.
+
+---
 
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="./assets/images/screenshot.png" width="50%" alt="Acordai App Icon">
+  <img src="./assets/images/screenshot.png" width="50%" alt="Zegen App Screenshot">
 </p>
 
-## ✨ Features
+---
 
-- 🗺️ **Interactive Map:** Select any point on the map as your destination.
-- 📍 **Geofencing Alerts:** App monitors when you are near the selected destination — even in background.
-- 🔔 **Loud Wake-Up Alarm:** When entering the destination area, an **alarm sound + high-priority notification** plays to wake you up.
-- 📱 **Works in Background:** Continues monitoring even when the app is minimized or closed.
-- 💤 **Perfect for Commuters:** Designed for people who might nap during travel and don’t want to miss their stop.
-- 🌗 **Light/Dark Theme:** Automatically adapts to your device’s appearance.
-- 🧭 **Accurate GPS Tracking:** Uses device location services for precision.
+## ✨ Key Features
+
+* 🗺️ **Interactive Map Selection**
+  Choose any point on the map as your destination with precision.
+
+* 📍 **Geofencing-Based Alerts**
+  Zegen continuously monitors your position and detects when you are near the selected destination — even while running in the background.
+
+* 🔔 **High-Priority Wake-Up Alarm**
+  A loud alarm sound combined with a maximum-priority notification ensures you won’t miss it.
+
+* 📱 **Background Execution**
+  Works reliably even when the app is minimized or closed.
+
+* 💤 **Built for Commuters**
+  Perfect for daily travel, naps on public transport, or long commutes.
+
+* 🌗 **Automatic Light / Dark Theme**
+  Seamlessly adapts to the system appearance.
+
+* 🧭 **Accurate GPS Tracking**
+  Uses native device location services for better accuracy and reliability.
 
 ---
 
 ## 🧩 Technologies Used
 
-- [React Native](https://reactnative.dev/)
-- [Expo SDK](https://docs.expo.dev/)
-- [expo-location](https://docs.expo.dev/versions/latest/sdk/location/)
-- [expo-notifications](https://docs.expo.dev/versions/latest/sdk/notifications/)
-- [expo-task-manager](https://docs.expo.dev/versions/latest/sdk/task-manager/)
-- [react-native-maps](https://github.com/react-native-maps/react-native-maps)
+* [React Native](https://reactnative.dev/)
+* [Expo SDK](https://docs.expo.dev/)
+* [expo-location](https://docs.expo.dev/versions/latest/sdk/location/)
+* [expo-notifications](https://docs.expo.dev/versions/latest/sdk/notifications/)
+* [expo-task-manager](https://docs.expo.dev/versions/latest/sdk/task-manager/)
+* [react-native-maps](https://github.com/react-native-maps/react-native-maps)
 
 ---
 
 ## 🏗️ Project Structure
 
 ```
-
-acordai/
+zegen/
 ├── app/
-│   ├── index.tsx            # Main screen (Map + Alarm logic)
+│   ├── index.tsx            # Main screen (map + alarm logic)
 │   ├── _layout.tsx          # Root layout
 │   └── ...
 ├── assets/
@@ -54,28 +72,29 @@ acordai/
 ├── app.json                 # Expo configuration (permissions, plugins, etc.)
 ├── package.json
 └── README.md
-
-````
+```
 
 ---
 
 ## ⚙️ Setup & Installation
 
 ### Prerequisites
-Make sure you have the following installed:
-- **Node.js** ≥ 18
-- **Expo CLI** (`npm install -g expo-cli`)
-- **Android Studio** (for emulators and builds)
-- **Google Maps API Key** (required for Android map view)
+
+Ensure the following tools are installed:
+
+* **Node.js** ≥ 18
+* **Expo CLI** (`npm install -g expo-cli`)
+* **Android Studio** (for emulator and builds)
+* **Google Maps API Key** (required for Android)
 
 ---
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/apozinn/acordai.git
-cd acordai
-````
+git clone https://github.com/apozinn/zegen.git
+cd zegen
+```
 
 ---
 
@@ -93,9 +112,15 @@ yarn install
 
 ---
 
-### 3. Configure Google Maps API Key
+### 3. Configure Google Maps API Key (Android)
 
-For Android, open `android/app/src/main/AndroidManifest.xml` and insert:
+Open:
+
+```
+android/app/src/main/AndroidManifest.xml
+```
+
+Add:
 
 ```xml
 <meta-data
@@ -103,7 +128,7 @@ For Android, open `android/app/src/main/AndroidManifest.xml` and insert:
   android:value="YOUR_API_KEY_HERE" />
 ```
 
-You can get a free key from [Google Cloud Console](https://console.cloud.google.com/).
+You can generate a key from the [Google Cloud Console](https://console.cloud.google.com/).
 
 ---
 
@@ -113,13 +138,15 @@ You can get a free key from [Google Cloud Console](https://console.cloud.google.
 npx expo start
 ```
 
-* Press **`a`** to open in Android Emulator
-* Press **`w`** to open in web browser
-* Press **`s`** to scan the QR code on a physical device (via Expo Go)
+Available options:
+
+* **`a`** → Android Emulator
+* **`w`** → Web browser
+* **`s`** → Scan QR code with Expo Go (physical device)
 
 ---
 
-### 5. Building for Production
+### 5. Production Build
 
 #### Android
 
@@ -128,7 +155,7 @@ npx expo prebuild
 npx expo build:android
 ```
 
-This will generate an `.apk` or `.aab` ready to upload to the **Google Play Store**.
+Generates an `.apk` or `.aab` ready for **Google Play Store**.
 
 #### iOS
 
@@ -136,13 +163,13 @@ This will generate an `.apk` or `.aab` ready to upload to the **Google Play Stor
 npx expo build:ios
 ```
 
-You’ll need a valid Apple Developer account to deploy to the App Store.
+> Requires an Apple Developer account.
 
 ---
 
 ## 🧪 Development & Testing
 
-To simulate proximity alerts without moving:
+To test alarm behavior without moving physically, you can simulate arrival:
 
 ```ts
 import * as Notifications from 'expo-notifications';
@@ -151,7 +178,7 @@ export async function simulateArrival() {
   await Notifications.scheduleNotificationAsync({
     content: {
       title: '🚨 Simulated Arrival!',
-      body: 'You have reached your selected point (simulation).',
+      body: 'You have reached your selected destination (simulation).',
       sound: 'alarm.mp3',
       priority: Notifications.AndroidNotificationPriority.MAX,
     },
@@ -160,35 +187,38 @@ export async function simulateArrival() {
 }
 ```
 
-Call `simulateArrival()` anywhere to test your notification behavior instantly.
+Call `simulateArrival()` anywhere during development to instantly test notifications.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome!
-Feel free to fork this repository and open pull requests with improvements.
+Contributions are very welcome!
 
-### Suggested areas:
+You can help by improving:
 
-* UI/UX improvements
-* Additional alarm customization (volume, vibration, etc.)
-* Better offline handling or fallback
-* Localization (multilingual support)
+* UI / UX
+* Alarm customization (volume, vibration patterns, sounds)
+* Offline behavior & fallbacks
+* Localization (multi-language support)
+* Performance & battery optimization
+
+Fork the repository and open a pull request 🚀
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **GNU LESSER GENERAL PUBLIC LICENSE** — see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the **GNU Lesser General Public License (LGPL)**.
+See the [LICENSE](./LICENSE) file for more information.
 
 ---
 
 ## 🌍 Support & Feedback
 
-If you enjoy this project, please give it a ⭐ on GitHub!
-Found a bug or have suggestions? Open an [issue](https://github.com/apozinn/acordai/issues).
+If you find Zegen useful, consider giving it a ⭐ on GitHub.
+Found a bug or have a feature idea? Open an issue!
 
 ---
 
-**Acordai** — *Never miss your stop again.*
+**Zegen** — *Never miss your destination again.*
